@@ -8,27 +8,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" />
     <title>CCC</title>
 </head>
 <body>
-    <ul class="nav justify-content-center background-color pt-2 shadow">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">New Receipt</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">History</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-        </li>
-    </ul>
-    @yield('content')
-</body>
-<style>
+    <div id="">
 
+        <ul class="nav justify-content-center background-color pt-2 shadow">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">New Receipt</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">History</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+            </li>
+        </ul>
+
+    @yield('content') 
+
+
+    <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
+    </div>
+</body>
+
+<style>
     .background-color{
         background-color:#e65251;
         height: 60px;
