@@ -9,14 +9,19 @@
 
 
 require('./bootstrap');
+
 import Vue from 'vue'; // if this is not work add this =>  window.Vue = require('vue');
 
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
 
+import VCalendar from 'v-calendar';
+
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
+Vue.use(VCalendar);
+
 
 import App from './app.vue';
 import { routes } from './routes';
