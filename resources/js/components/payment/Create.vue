@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="col">
                                         <label for="otherAmount" class="form-label">Amount</label>
-                                        <input type="number" class="form-control mb-3"  id="otherAmount" @focus="otherExpenseClick" v-model="otherExpense">
+                                        <input type="number" class="form-control mb-3"  id="otherAmount" @click="otherExpenseClick" v-model="otherExpense">
                                     </div>
                                 </div>
                                 <input type="checkbox"  id="stayingAtCCC" name="stayingAtCCC" value="stayingAtCCC" @click="stayingAtCCCClick">

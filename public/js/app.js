@@ -29004,7 +29004,7 @@ var render = function () {
                               attrs: { type: "number", id: "otherAmount" },
                               domProps: { value: _vm.otherExpense },
                               on: {
-                                focus: _vm.otherExpenseClick,
+                                click: _vm.otherExpenseClick,
                                 input: function ($event) {
                                   if ($event.target.composing) {
                                     return
