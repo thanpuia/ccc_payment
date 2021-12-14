@@ -5416,12 +5416,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       freeModel: false,
       otherField: false,
-      stayingAtCCCClickField: true,
+      stayingAtCCCClickField: false,
       cccRangeModel: '',
       amountToPay: 0,
       pcrRate: 0,
@@ -5429,7 +5433,11 @@ __webpack_require__.r(__webpack_exports__);
       ratRate: 0,
       foodRate: 0,
       accomodationRate: 0,
-      rate: [{}]
+      pcrBoolean: false,
+      ratBoolean: false,
+      truenatBoolean: false,
+      foodBoolean: false,
+      accomodationBoolean: false
     };
   },
   methods: {
@@ -5444,16 +5452,35 @@ __webpack_require__.r(__webpack_exports__);
       this.stayingAtCCCClickField = !this.stayingAtCCCClickField;
     },
     cccFoodClick: function cccFoodClick() {},
+    pcrClick: function pcrClick() {
+      this.pcrBoolean = !this.pcrBoolean;
+      if (this.pcrBoolean) this.amountToPay = this.pcrRate + this.amountToPay;else this.amountToPay = this.amountToPay - this.pcrRate;
+    },
+    truenatClick: function truenatClick() {
+      this.truenatBoolean = !this.truenatBoolean;
+      if (this.truenatBoolean) this.amountToPay = this.truenatRate + this.amountToPay;else this.amountToPay = this.amountToPay - this.truenatRate;
+    },
+    ratClick: function ratClick() {
+      this.ratBoolean = !this.ratBoolean;
+      if (this.ratBoolean) this.amountToPay = this.ratRate + this.amountToPay;else this.amountToPay = this.amountToPay - this.ratRate;
+    },
     getTestingFees: function getTestingFees() {
       var _this = this;
 
       this.axios.get('api/rate/get').then(function (_ref) {
         var data = _ref.data;
-        // for(i=0;i<data.length;i++){
-        //     this.rate.name = data.name;
-        //     this.rate.rate = data.rate;
-        // }
         console.log(_this.rate);
+        /*
+        NOTE:-
+        0.PCT | 1. Truenat | 2. RAT | 3.Food | 4. Accomodation
+        This is how it is ordered in the database, its easier
+        */
+
+        _this.pcrRate = parseInt(data[0].rate);
+        _this.truenatRate = parseInt(data[1].rate);
+        _this.ratRate = parseInt(data[2].rate);
+        _this.foodRate = parseInt(data[3].rate);
+        _this.accomodationRate = parseInt(data[4].rate);
       })["catch"](function (error) {
         console.log("error");
       });
@@ -28891,6 +28918,7 @@ var render = function () {
                         name: "pcr",
                         value: "pcr",
                       },
+                      on: { click: _vm.pcrClick },
                     }),
                     _vm._v(" "),
                     _c("label", { attrs: { for: "pcr" } }, [
@@ -28904,6 +28932,7 @@ var render = function () {
                         name: "truenat",
                         value: "truenat",
                       },
+                      on: { click: _vm.truenatClick },
                     }),
                     _vm._v(" "),
                     _c("label", { attrs: { for: "truenat" } }, [
@@ -28917,6 +28946,7 @@ var render = function () {
                         name: "rat",
                         value: "rat",
                       },
+                      on: { click: _vm.ratClick },
                     }),
                     _vm._v(" "),
                     _c("label", { attrs: { for: "rat" } }, [

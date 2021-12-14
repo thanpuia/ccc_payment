@@ -38,13 +38,13 @@
                                 <label for="free">Free</label>
                                 <input v-if="freeModel" type="text" name="free-reason"  id="free-reason" placeholder="Reasons">
                                 <hr>
-                                <input type="checkbox"  id="pcr" name="pcr" value="pcr">
+                                <input type="checkbox"  id="pcr" name="pcr" value="pcr" @click="pcrClick">
                                 <label for="pcr">RT-PCR Test</label>
 
-                                <input type="checkbox"  id="truenat" name="truenat" value="truenat">
+                                <input type="checkbox"  id="truenat" name="truenat" value="truenat" @click="truenatClick">
                                 <label for="truenat">Truenat Test</label>
 
-                                <input type="checkbox"  id="rat" name="rat" value="rat">
+                                <input type="checkbox"  id="rat" name="rat" value="rat" @click="ratClick">
                                 <label for="rat">Rapit Antigen Test</label>
                                 <br>
                                 <input type="checkbox"  id="other" name="other" value="other" @click="otherFieldClick">
@@ -81,6 +81,10 @@
                         <div class="mt-2" style="font-size:22px">
                             Total Amount To Pay: ₹{{ amountToPay }}
                         </div>
+                        
+
+                        
+
                     </div>
                     
             </div> 
@@ -96,7 +100,7 @@ export default {
         return{
             freeModel:false,
             otherField:false,
-            stayingAtCCCClickField:true,
+            stayingAtCCCClickField:false,
             cccRangeModel:'',
             amountToPay:0,
 
@@ -105,7 +109,11 @@ export default {
             ratRate:0,
             foodRate:0,
             accomodationRate:0,
-            rate:[{}],
+            pcrBoolean:false,
+            ratBoolean:false,
+            truenatBoolean:false,
+            foodBoolean:false,
+            accomodationBoolean:false,
 
         }
     },
@@ -113,7 +121,6 @@ export default {
         freeClick(){
 
             this.freeModel=!this.freeModel;
-
             console.log(this.freeModel);
         },
         otherFieldClick(){
@@ -127,15 +134,45 @@ export default {
         cccFoodClick(){
 
         },
+        pcrClick(){
+            this.pcrBoolean = !this.pcrBoolean;
+            if(this.pcrBoolean)
+                this.amountToPay = this.pcrRate +this.amountToPay;
+            else
+                this.amountToPay = this.amountToPay -this.pcrRate ;
+
+        },
+        truenatClick(){
+            this.truenatBoolean = !this.truenatBoolean;
+             if(this.truenatBoolean)
+                this.amountToPay = this.truenatRate +this.amountToPay;
+            else
+                this.amountToPay = this.amountToPay -this.truenatRate;
+        },
+        ratClick(){
+            this.ratBoolean = !this.ratBoolean;
+             if(this.ratBoolean)
+                this.amountToPay = this.ratRate +this.amountToPay;
+            else
+                this.amountToPay = this.amountToPay - this.ratRate;
+        },
 
         getTestingFees(){
             this.axios.get('api/rate/get')
             .then(({data}) => {
-                // for(i=0;i<data.length;i++){
-                //     this.rate.name = data.name;
-                //     this.rate.rate = data.rate;
-                // }
+               
                 console.log(this.rate);
+
+    /*
+    NOTE:-
+    0.PCT | 1. Truenat | 2. RAT | 3.Food | 4. Accomodation
+    This is how it is ordered in the database, its easier
+    */
+                this.pcrRate=parseInt(data[0].rate);
+                this.truenatRate=parseInt(data[1].rate);
+                this.ratRate=parseInt(data[2].rate);
+                this.foodRate = parseInt(data[3].rate);
+                this.accomodationRate=parseInt(data[4].rate);
             })
             .catch(error => {
                 console.log("error");
