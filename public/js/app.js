@@ -5420,11 +5420,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       freeModel: false,
       otherField: false,
+      otherExpense: 0,
       stayingAtCCCClickField: false,
       cccRangeModel: '',
       amountToPay: 0,
@@ -5463,6 +5465,10 @@ __webpack_require__.r(__webpack_exports__);
     ratClick: function ratClick() {
       this.ratBoolean = !this.ratBoolean;
       if (this.ratBoolean) this.amountToPay = this.ratRate + this.amountToPay;else this.amountToPay = this.amountToPay - this.ratRate;
+    },
+    otherExpenseClick: function otherExpenseClick() {
+      console.log("FF");
+      this.amountToPay = this.amountToPay + parseInt(this.otherExpense);
     },
     getTestingFees: function getTestingFees() {
       var _this = this;
@@ -28965,7 +28971,7 @@ var render = function () {
                       on: { click: _vm.otherFieldClick },
                     }),
                     _vm._v(" "),
-                    _c("label", { attrs: { for: "rat" } }, [
+                    _c("label", { attrs: { for: "other" } }, [
                       _vm._v("Other Expenses"),
                     ]),
                     _vm._v(" "),
@@ -28975,7 +28981,39 @@ var render = function () {
                       ? _c("div", { staticClass: "row" }, [
                           _vm._m(1),
                           _vm._v(" "),
-                          _vm._m(2),
+                          _c("div", { staticClass: "col" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "form-label",
+                                attrs: { for: "otherAmount" },
+                              },
+                              [_vm._v("Amount")]
+                            ),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.otherExpense,
+                                  expression: "otherExpense",
+                                },
+                              ],
+                              staticClass: "form-control mb-3",
+                              attrs: { type: "number", id: "otherAmount" },
+                              domProps: { value: _vm.otherExpense },
+                              on: {
+                                focus: _vm.otherExpenseClick,
+                                input: function ($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.otherExpense = $event.target.value
+                                },
+                              },
+                            }),
+                          ]),
                         ])
                       : _vm._e(),
                     _vm._v(" "),
@@ -29051,7 +29089,7 @@ var render = function () {
                   _vm._v(
                     "\n                        Total Amount To Pay: ₹" +
                       _vm._s(_vm.amountToPay) +
-                      "\n                    "
+                      "\n                         \n                    "
                   ),
                 ]
               ),
@@ -29164,23 +29202,6 @@ var staticRenderFns = [
       _c("input", {
         staticClass: "form-control mb-3",
         attrs: { type: "text", id: "otherName" },
-      }),
-    ])
-  },
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col" }, [
-      _c(
-        "label",
-        { staticClass: "form-label", attrs: { for: "otherAmount" } },
-        [_vm._v("Amount")]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control mb-3",
-        attrs: { type: "number", id: "otherAmount" },
       }),
     ])
   },

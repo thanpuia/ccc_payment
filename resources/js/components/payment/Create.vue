@@ -48,7 +48,7 @@
                                 <label for="rat">Rapit Antigen Test</label>
                                 <br>
                                 <input type="checkbox"  id="other" name="other" value="other" @click="otherFieldClick">
-                                <label for="rat">Other Expenses</label>
+                                <label for="other">Other Expenses</label>
                                 <br>
                                 <div class="row" v-if="otherField">
                                     <div class="col">
@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="col">
                                         <label for="otherAmount" class="form-label">Amount</label>
-                                        <input type="number" class="form-control mb-3"  id="otherAmount">
+                                        <input type="number" class="form-control mb-3"  id="otherAmount" @focus="otherExpenseClick" v-model="otherExpense">
                                     </div>
                                 </div>
                                 <input type="checkbox"  id="stayingAtCCC" name="stayingAtCCC" value="stayingAtCCC" @click="stayingAtCCCClick">
@@ -80,6 +80,7 @@
                         </div>
                         <div class="mt-2" style="font-size:22px">
                             Total Amount To Pay: ₹{{ amountToPay }}
+                             
                         </div>
                         
 
@@ -100,6 +101,7 @@ export default {
         return{
             freeModel:false,
             otherField:false,
+            otherExpense:0,
             stayingAtCCCClickField:false,
             cccRangeModel:'',
             amountToPay:0,
@@ -155,6 +157,11 @@ export default {
                 this.amountToPay = this.ratRate +this.amountToPay;
             else
                 this.amountToPay = this.amountToPay - this.ratRate;
+        },
+        otherExpenseClick(){
+            console.log("FF");
+            this.amountToPay = this.amountToPay + parseInt(this.otherExpense)
+
         },
 
         getTestingFees(){
