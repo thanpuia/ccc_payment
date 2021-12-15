@@ -21,12 +21,12 @@ class PaymentController extends Controller
    
     public function create()
     {
-        //
+        
     }
 
     public function store(Request $request)
     {
-        //
+        error_log($request);
     }
 
     public function show(Payment $payment)

@@ -2,71 +2,80 @@
     <div>
           <div class="container mt-5">
         <div class="row">
-            <div class="col">
-                    <h3>New Customer</h3>
+            <div class="col-md-6">
 
                 <div style="background-color:#fcfcfc" class="p-4 shadow-sm">
+                    <h3>New Customer</h3>
 
-                    <form action="">
+                  
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control mb-3"  id="name">
+                        <input type="text" class="form-control mb-3"  id="name" v-model="formName">
 
                         <label for="mobile_number" class="form-label">Mobile Number</label>
-                        <input type="text" class="form-control  mb-3"  id="mobile_number">
+                        <input type="text" class="form-control  mb-3"  id="mobile_number" v-model="formMobileNumber">
 
                         <label for="locality" class="form-label">Locality</label>
-                        <input type="text" class="form-control mb-3"  id="locality">
+                        <input type="text" class="form-control mb-3"  id="locality" v-model="formLocality">
 
                         <label for="city" class="form-label">Village/Town/City</label>
-                        <input type="text" class="form-control mb-3"  id="city">
+                        <input type="text" class="form-control mb-3"  id="city" v-model="formCity">
 
                         <label for="district" class="form-label">District</label>
-                        <input type="text" class="form-control mb-3"  id="dictrict">
+                        <input type="text" class="form-control mb-3"  id="dictrict" v-model="formDistrict">
 
-                        <label for="name" class="form-label">State</label>
-                        <input type="text" class="form-control mb-3"  id="name">
-                    </form>
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" class="form-control mb-3"  id="state" v-model="formState">
+
+                        <label for="center" class="form-label">Center</label>
+                        <input type="text" class="form-control mb-3"  id="center" v-model="center">
+                    
                 </div>
             </div>
             
-            <div class="col">
-                    <h3>Test</h3>
+            <div class="col-md-6">
                     <div style="background-color:#fcfcfc" class="p-4 shadow-sm">
-                        <div style="background-color:aquamarine" class="p-3">
+                    <h3>Test</h3>
+
+                        <div style="background-color:#f2f2f2" class="p-3">
                             <form action="">
-                                <input type="checkbox"  id="free" name="free" value="free" @click="freeClick" >
+                                <input type="checkbox"  id="free" name="free" value="free" @click="freeClick" v-model="formFree">
                                 <label for="free">Free</label>
                                 <input v-if="freeModel" type="text" name="free-reason"  id="free-reason" placeholder="Reasons">
                                 <hr>
-                                <input type="checkbox"  id="pcr" name="pcr" value="pcr" @click="pcrClick">
+                                <input type="checkbox"  id="pcr" name="pcr" value="pcr" @click="pcrClick" v-model="formPcr">
                                 <label for="pcr">RT-PCR Test</label>
 
-                                <input type="checkbox"  id="truenat" name="truenat" value="truenat" @click="truenatClick">
+                                <input type="checkbox"  id="truenat" name="truenat" value="truenat" @click="truenatClick" v-model="formTruenat">
                                 <label for="truenat">Truenat Test</label>
 
-                                <input type="checkbox"  id="rat" name="rat" value="rat" @click="ratClick">
+                                <input type="checkbox"  id="rat" name="rat" value="rat" @click="ratClick" v-model="formRat">
                                 <label for="rat">Rapit Antigen Test</label>
                                 <br>
-                                <input type="checkbox"  id="other" name="other" value="other" @click="otherFieldClick">
+                                <input type="checkbox"  id="other" name="other" value="other" @click="otherFieldClick" >
                                 <label for="other">Other Expenses</label>
                                 <br>
                                 <div class="row" v-if="otherField">
                                     <div class="col">
                                         <label for="otherName" class="form-label">Name</label>
-                                        <input type="text" class="form-control mb-3"  id="otherName">
+                                        <input type="text" class="form-control mb-3"  id="otherName" v-model="formOtherName">
                                     </div>
                                     <div class="col">
                                         <label for="otherAmount" class="form-label">Amount</label>
-                                        <input type="number" class="form-control mb-3"  id="otherAmount" @click="otherExpenseClick" v-model="otherExpense">
+                                        <input type="number" class="form-control mb-3"  id="otherAmount" v-model="formOtherExpense">
+                                    </div>
+                                    <div class="col">
+                                        <button type="button" class="btn bg-color" @click="extraCalcClick">Calculate</button>                                    
                                     </div>
                                 </div>
                                 <input type="checkbox"  id="stayingAtCCC" name="stayingAtCCC" value="stayingAtCCC" @click="stayingAtCCCClick">
-                                <label for="stayingAtCCC" class="form-label">Staying at Covid Care Center (CCC)</label>
-
+                                <label for="stayingAtCCC" class="form-label">Staying at Covid Care Center (CCC)
+                                    
+                                </label>
+                                <p style="background-color:red">Calender days lak dan tur ka hre lo</p>
                                 <div class="row" v-if="stayingAtCCCClickField">
                                     
                                     <div class="col">
-                                       <v-date-picker v-model="cccRangeModel" is-range />
+                                       <v-date-picker mode="range" v-model="cccRangeModel" is-range />
                                     </div>
                                     <div class="col">
                                         <label for="cccFood" class="form-label">Food</label>
@@ -80,30 +89,56 @@
                         </div>
                         <div class="mt-2" style="font-size:22px">
                             Total Amount To Pay: ₹{{ amountToPay }}
-                             
+                            <!-- <br>Days: {{ cccRangeModel.days }}
+                            <br>Start: {{ cccRangeModel.start }} -->
                         </div>
                         
 
                         
 
                     </div>
-                    
+                    <div style="background-color:#fcfcfc" class="p-4 shadow-sm mt-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="iName" class="form-label">Issuer Name (Optional)</label>
+                                    <input type="text" class="form-control mb-3"  id="iName" v-model="iName">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="iDesignation" class="form-label">Issuer Designation (Optional)</label>
+                                    <input type="text" class="form-control mb-3"  id="iDesignation" v-model="iDesignation">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="iAddress" class="form-label">Issuer Office Address (Optional)</label>
+                                    <input type="text" class="form-control mb-3"  id="iAddress" v-model="iAddress">
+                                </div>
+                            </div>
+                            
+                    </div>
             </div> 
-            <button type="button" class="btn btn-primary mt-4" style="background-color:#e65251;border:none;">Submit</button>
+            <button type="button" class="btn mt-4 bg-color" @click="submitForm" >Submit</button>
         </div>
     </div>
  
     </div>
 </template>
+<style>
+    
+  
+      .bg-color{
+        color: #fff;
+        background-color: #e65251;
+        border:none;
+    }
+</style>
 <script>
 export default {
     data(){
         return{
             freeModel:false,
             otherField:false,
-            otherExpense:0,
+            formOtherExpense:0,
             stayingAtCCCClickField:false,
-            cccRangeModel:'',
+            cccRangeModel:{},
             amountToPay:0,
 
             pcrRate:0,
@@ -111,11 +146,37 @@ export default {
             ratRate:0,
             foodRate:0,
             accomodationRate:0,
+            
             pcrBoolean:false,
             ratBoolean:false,
             truenatBoolean:false,
             foodBoolean:false,
             accomodationBoolean:false,
+            tempAmount:0,
+
+            stayingDay:0,
+
+            formName:'',
+            formMobileNumber:'',
+            formLocality:'',
+            formCity:'',
+            formDistrict:'',
+            formState:'',
+            formCenter:'',
+
+            formFree:false,
+            formOtherExpense:'',
+            formOtherName:'',
+            
+            formPcr:false,
+            formTruenat:false,
+            formRat:false,
+            iName:'',
+            iDesignation:'',
+            iAddress:'',
+
+            formSubmitObject:{},
+
 
         }
     },
@@ -158,12 +219,7 @@ export default {
             else
                 this.amountToPay = this.amountToPay - this.ratRate;
         },
-        otherExpenseClick(){
-            console.log("FF");
-            this.amountToPay = this.amountToPay + parseInt(this.otherExpense)
-
-        },
-
+      
         getTestingFees(){
             this.axios.get('api/rate/get')
             .then(({data}) => {
@@ -183,6 +239,47 @@ export default {
             })
             .catch(error => {
                 console.log("error");
+            })
+        },
+        extraCalcClick(){
+            //this.amountToPay = this.formOtherExpense - this.tempAmount;
+
+
+            this.amountToPay = parseInt(this.amountToPay) + parseInt(this.formOtherExpense) - parseInt(this.tempAmount);
+
+            this.tempAmount = parseInt(this.formOtherExpense);
+
+        },
+        submitForm(){
+            this.formSubmitObject.name = this.formName;
+            this.formSubmitObject.mobileNumber = this.formMobileNumber;
+            this.formSubmitObject.locality = this.formLocality;
+            this.formSubmitObject.city = this.formCity;
+            this.formSubmitObject.district = this.formDistrict;
+            this.formSubmitObject.state = this.formState;
+
+            this.formSubmitObject.free = this.formFree;
+            this.formSubmitObject.pcr = this.formPcr;
+            this.formSubmitObject.truenat = this.formTruenat;
+            this.formSubmitObject.rat = this.formRat;
+            this.formSubmitObject.otherName = this.formOtherName;
+            this.formSubmitObject.otherExpense = this.formOtherExpense;
+
+
+            this.formSubmitObject.iname = this.formName;
+            this.formSubmitObject.iDesignation = this.formCity;
+            this.formSubmitObject.iAddress = this.formName;
+
+            this.formSubmitObject.amountToPay = this.amountToPay;
+
+            axios.post('api/customer/create',{
+                body:this.formSubmitObject
+            })
+            .then(response =>{
+
+            })
+            .catch(e=>{
+
             })
         },
     },

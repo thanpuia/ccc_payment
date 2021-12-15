@@ -41,9 +41,18 @@ class CustomerController extends Controller
         $centers = Center::all();
        return view('customer.create',compact('rates','centers'));
     }
- 
+    /*
+    TODO::THIS IS POST SENT TO store()
+
+    {"body":{
+        "name":"Lalthanpuia","mobileNumber":"8765","locality":"Electric",
+        "city":"Aizawl","district":"Aizawl","state":"Mizoram","free":"",
+        "pcr":true,"truenat":true,"rat":true,"otherName":"OtherName","otherExpense":"77",
+        "iname":"Lalthanpuia","iDesignation":"Aizawl","iAddress":"Lalthanpuia","amountToPay":377}}
+    */
     public function store(Request $request)
     {
+
         $customer = new Customer();
          
         $customer->token= Str::random(8);
@@ -53,26 +62,26 @@ class CustomerController extends Controller
         }else{
 
         }
-        $customer->amount = $request['amount'];
+        $customer->amount = $request['amountToPay'];
         $customer->name = $request['name'];
         $customer->locality = $request['locality'];
-        $customer->area = $request['area'];
+        $customer->area = $request['city'];
         $customer->district = $request['district'];
         $customer->state = $request['state'];
-        $customer->mobile = $request['mobile'];
+        $customer->mobile = $request['mobileNumber'];
         $customer->center = $request['center'];
 
-        if($request['RT_PCR']=="false")   
+        if($request['pcr']=="false")   
             $customer->pcr = false;
         else
             $customer->pcr = true;
 
-        if($request['Truenat']=="false")   
+        if($request['truenat']=="false")   
             $customer->truenat = false;
         else
             $customer->truenat = true;
 
-        if($request['RAT']=="false")   
+        if($request['rat']=="false")   
             $customer->rat = false;
         else
             $customer->rat = true;
@@ -87,9 +96,9 @@ class CustomerController extends Controller
         $customer->ccc_days = $request['ccc_days'];
         $customer->ccc_start = $request['ccc_start'];
         $customer->ccc_end = $request['ccc_end'];
-        $customer->issuer_name = $request['issuer_name'];
-        $customer->issuer_designation = $request['issuer_designation']; 
-        $customer->issuer_office_address = $request['issuer_office_address'];
+        $customer->issuer_name = $request['iname'];
+        $customer->issuer_designation = $request['iDesignation']; 
+        $customer->issuer_office_address = $request['iAddress'];
         //$customer->razorpay_payment_id = $request['razorpay_payment_id'];
 
         $customer->reason = $request['reason'];
