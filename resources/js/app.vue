@@ -9,7 +9,7 @@
                 <a class="nav-link" href="/create">Create</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">History</a>
+                <a class="nav-link" href="/payment-list">Payment-List</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled">Disabled</a>

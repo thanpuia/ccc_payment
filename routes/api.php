@@ -24,3 +24,4 @@ Route::get('rate/get',[PaymentController::class,'index']);
 Route::post('payment/create',[PaymentController::class,'store']);
 
 Route::post('customer/store',[CustomerController::class,'store']);
+Route::get('customer',[CustomerController::class,'index']);

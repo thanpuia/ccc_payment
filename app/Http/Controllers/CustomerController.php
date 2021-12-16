@@ -14,7 +14,7 @@ use Carbon\Carbon;
 class CustomerController extends Controller
 {
     private $returnURL ="http://localhost:8000/payment-return";
-
+    /*
     public function index()
     {
         $centers = Center::all();
@@ -37,7 +37,11 @@ class CustomerController extends Controller
         return view ('customer.index',compact('customers','customerCount','pcrCount','ratCount','truenatCount','centers','centerName','fromDate','toDate','amount'));
 
     }
-
+    */
+    public function index()
+    {
+       return Customer::all();
+    }
     
     public function create()
     {
