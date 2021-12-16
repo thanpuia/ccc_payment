@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CustomerController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,4 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('rate/get',[PaymentController::class,'index']);
 Route::post('payment/create',[PaymentController::class,'store']);
-Route::post('customer/create',[CustomerController::class,'store']);
+
+Route::post('customer/store',[CustomerController::class,'store']);

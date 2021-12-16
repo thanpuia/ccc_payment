@@ -1,5 +1,6 @@
 import Example from './components/ExampleComponent.vue';
 import Create from './components/payment/Create.vue';
+import Confirmation from './components/payment/Confirmation.vue';
 
 export const routes = [
     {
@@ -12,5 +13,9 @@ export const routes = [
         path: '/create',
         component: Create
     },
-    
+    {
+        name:'confirmation',
+        path: '/confirmation',
+        component: Confirmation
+    },
 ];

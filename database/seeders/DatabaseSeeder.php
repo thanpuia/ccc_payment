@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,5 +14,27 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
+        DB::table('rates')->insert([
+            'name' => 'PCR',
+            'rate' => '100'
+        ]);
+        DB::table('rates')->insert([
+            'name' => 'Truenat',
+            'rate' => '100',
+        ]);
+        DB::table('rates')->insert([
+            'name' => 'RAT',
+            'rate' => '100',
+        ]);
+        DB::table('rates')->insert([
+            'name' => 'Food',
+            'rate' => '120',
+        ]);
+
+        DB::table('rates')->insert([
+            'name' => 'Accomodation',
+            'rate' => '50',
+        ]);
+
     }
 }

@@ -1,130 +1,122 @@
 <template>
     <div>
-          <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6">
-
-                <div style="background-color:#fcfcfc" class="p-4 shadow-sm">
-                    <h3>New Customer</h3>
-
-                  
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control mb-3"  id="name" v-model="formName">
-
-                        <label for="mobile_number" class="form-label">Mobile Number</label>
-                        <input type="text" class="form-control  mb-3"  id="mobile_number" v-model="formMobileNumber">
-
-                        <label for="locality" class="form-label">Locality</label>
-                        <input type="text" class="form-control mb-3"  id="locality" v-model="formLocality">
-
-                        <label for="city" class="form-label">Village/Town/City</label>
-                        <input type="text" class="form-control mb-3"  id="city" v-model="formCity">
-
-                        <label for="district" class="form-label">District</label>
-                        <input type="text" class="form-control mb-3"  id="dictrict" v-model="formDistrict">
-
-                        <label for="state" class="form-label">State</label>
-                        <input type="text" class="form-control mb-3"  id="state" v-model="formState">
-
-                        <label for="center" class="form-label">Center</label>
-                        <input type="text" class="form-control mb-3"  id="center" v-model="center">
-                    
-                </div>
-            </div>
-            
-            <div class="col-md-6">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6">
                     <div style="background-color:#fcfcfc" class="p-4 shadow-sm">
-                    <h3>Test</h3>
-
+                        <h3>New Customer</h3>
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control mb-3" id="name" v-model="formName">
+                        <label for="mobile_number" class="form-label">Mobile Number</label>
+                        <input type="text" class="form-control  mb-3" id="mobile_number" v-model="formMobileNumber">
+                        <label for="locality" class="form-label">Locality</label>
+                        <input type="text" class="form-control mb-3" id="locality" v-model="formLocality">
+                        <label for="city" class="form-label">Village/Town/City</label>
+                        <input type="text" class="form-control mb-3" id="city" v-model="formCity">
+                        <label for="district" class="form-label">District</label>
+                        <input type="text" class="form-control mb-3" id="dictrict" v-model="formDistrict">
+                        <label for="state" class="form-label">State</label>
+                        <input type="text" class="form-control mb-3" id="state" v-model="formState">
+                        <label for="center" class="form-label">Center</label>
+                        <input type="text" class="form-control mb-3" id="center" v-model="formCenter">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div style="background-color:#fcfcfc" class="p-4 shadow-sm">
+                        <h3>Test</h3>
                         <div style="background-color:#f2f2f2" class="p-3">
                             <form action="">
-                                <input type="checkbox"  id="free" name="free" value="free" @click="freeClick" v-model="formFree">
+                                <input type="checkbox" id="free" name="free" value="free" @click="freeClick" v-model="formFree">
                                 <label for="free">Free</label>
-                                <input v-if="freeModel" type="text" name="free-reason"  id="free-reason" placeholder="Reasons">
+                                <input v-if="freeModel" type="text" name="free-reason" id="free-reason" placeholder="Reasons" v-model="formFreeReason">
                                 <hr>
-                                <input type="checkbox"  id="pcr" name="pcr" value="pcr" @click="pcrClick" v-model="formPcr">
+                                <input type="checkbox" id="pcr" name="pcr" value="pcr" @click="pcrClick" v-model="formPcr">
                                 <label for="pcr">RT-PCR Test</label>
-
-                                <input type="checkbox"  id="truenat" name="truenat" value="truenat" @click="truenatClick" v-model="formTruenat">
+                                <input type="checkbox" id="truenat" name="truenat" value="truenat" @click="truenatClick" v-model="formTruenat">
                                 <label for="truenat">Truenat Test</label>
-
-                                <input type="checkbox"  id="rat" name="rat" value="rat" @click="ratClick" v-model="formRat">
+                                <input type="checkbox" id="rat" name="rat" value="rat" @click="ratClick" v-model="formRat">
                                 <label for="rat">Rapit Antigen Test</label>
                                 <br>
-                                <input type="checkbox"  id="other" name="other" value="other" @click="otherFieldClick" >
+                                <input type="checkbox" id="other" name="other" value="other" @click="otherFieldClick" v-model="formOtherExpenseCheckbox">
                                 <label for="other">Other Expenses</label>
                                 <br>
                                 <div class="row" v-if="otherField">
                                     <div class="col">
                                         <label for="otherName" class="form-label">Name</label>
-                                        <input type="text" class="form-control mb-3"  id="otherName" v-model="formOtherName">
+                                        <input type="text" class="form-control mb-3" id="otherName" v-model="formOtherName">
                                     </div>
                                     <div class="col">
                                         <label for="otherAmount" class="form-label">Amount</label>
-                                        <input type="number" class="form-control mb-3"  id="otherAmount" v-model="formOtherExpense">
+                                        <input type="number" class="form-control mb-3" id="otherAmount" v-model="formOtherExpense">
                                     </div>
                                     <div class="col">
-                                        <button type="button" class="btn bg-color" @click="extraCalcClick">Calculate</button>                                    
+                                        <button type="button" class="btn bg-color" @click="extraCalcClick">Calculate</button>
                                     </div>
                                 </div>
-                                <input type="checkbox"  id="stayingAtCCC" name="stayingAtCCC" value="stayingAtCCC" @click="stayingAtCCCClick">
-                                <label for="stayingAtCCC" class="form-label">Staying at Covid Care Center (CCC)
-                                    
-                                </label>
+                                <input type="checkbox" id="stayingAtCCC" name="stayingAtCCC" value="stayingAtCCC" @click="stayingAtCCCClick">
+                                <label for="stayingAtCCC" class="form-label">Staying at Covid Care Center (CCC) </label>
                                 <p style="background-color:red">Calender days lak dan tur ka hre lo</p>
                                 <div class="row" v-if="stayingAtCCCClickField">
-                                    
                                     <div class="col">
-                                       <v-date-picker mode="range" v-model="cccRangeModel" is-range />
+                                        <v-date-picker mode="range" v-model="cccRangeModel" is-range />
                                     </div>
                                     <div class="col">
                                         <label for="cccFood" class="form-label">Food</label>
-                                        <input type="checkbox"  id="cccFood" name="cccFood" value="cccFood" @click="cccFoodClick">
-
+                                        <input type="checkbox" id="cccFood" name="cccFood" value="cccFood" @click="cccFoodClick">
                                     </div>
                                 </div>
-
                             </form>
- 
                         </div>
-                        <div class="mt-2" style="font-size:22px">
-                            Total Amount To Pay: ₹{{ amountToPay }}
+                        <div class="mt-2" style="font-size:22px"> Total Amount To Pay: ₹{{ amountToPay }}
                             <!-- <br>Days: {{ cccRangeModel.days }}
-                            <br>Start: {{ cccRangeModel.start }} -->
+                                <br>Start: {{ cccRangeModel.start }} -->
                         </div>
-                        
-
-                        
-
                     </div>
                     <div style="background-color:#fcfcfc" class="p-4 shadow-sm mt-4">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <label for="iName" class="form-label">Issuer Name (Optional)</label>
-                                    <input type="text" class="form-control mb-3"  id="iName" v-model="iName">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="iDesignation" class="form-label">Issuer Designation (Optional)</label>
-                                    <input type="text" class="form-control mb-3"  id="iDesignation" v-model="iDesignation">
-                                </div>
-                                <div class="col-md-4">
-                                    <label for="iAddress" class="form-label">Issuer Office Address (Optional)</label>
-                                    <input type="text" class="form-control mb-3"  id="iAddress" v-model="iAddress">
-                                </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="iName" class="form-label">Issuer Name (Optional)</label>
+                                <input type="text" class="form-control mb-3" id="iName" v-model="iName">
                             </div>
-                            
+                            <div class="col-md-4">
+                                <label for="iDesignation" class="form-label">Issuer Designation (Optional)</label>
+                                <input type="text" class="form-control mb-3" id="iDesignation" v-model="iDesignation">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="iAddress" class="form-label">Issuer Office Address (Optional)</label>
+                                <input type="text" class="form-control mb-3" id="iAddress" v-model="iAddress">
+                            </div>
+                        </div>
                     </div>
-            </div> 
-            <button type="button" class="btn mt-4 bg-color" @click="submitForm" >Submit</button>
+                </div>
+                <button type="button" class="btn mt-4 bg-color" @click="submitForm">Submit</button>
+            </div>
+            <div v-if="showSuccessBookingModal">
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
-    </div>
- 
     </div>
 </template>
 <style>
-    
-  
-      .bg-color{
+    .bg-color{
         color: #fff;
         background-color: #e65251;
         border:none;
@@ -165,6 +157,7 @@ export default {
             formCenter:'',
 
             formFree:false,
+            formFreeReason:'',
             formOtherExpense:'',
             formOtherName:'',
             
@@ -174,12 +167,13 @@ export default {
             iName:'',
             iDesignation:'',
             iAddress:'',
-
+            formOtherExpenseCheckbox:false,
             formSubmitObject:{},
-
+            showSuccessBookingModal:true,
 
         }
     },
+    
     methods:{
         freeClick(){
 
@@ -228,7 +222,7 @@ export default {
 
     /*
     NOTE:-
-    0.PCT | 1. Truenat | 2. RAT | 3.Food | 4. Accomodation
+    0.PCR | 1. Truenat | 2. RAT | 3.Food | 4. Accomodation
     This is how it is ordered in the database, its easier
     */
                 this.pcrRate=parseInt(data[0].rate);
@@ -244,7 +238,6 @@ export default {
         extraCalcClick(){
             //this.amountToPay = this.formOtherExpense - this.tempAmount;
 
-
             this.amountToPay = parseInt(this.amountToPay) + parseInt(this.formOtherExpense) - parseInt(this.tempAmount);
 
             this.tempAmount = parseInt(this.formOtherExpense);
@@ -257,30 +250,36 @@ export default {
             this.formSubmitObject.city = this.formCity;
             this.formSubmitObject.district = this.formDistrict;
             this.formSubmitObject.state = this.formState;
+            this.formSubmitObject.center = this.formCenter;
 
             this.formSubmitObject.free = this.formFree;
+            this.formSubmitObject.freeReason = this.formFreeReason;
             this.formSubmitObject.pcr = this.formPcr;
             this.formSubmitObject.truenat = this.formTruenat;
             this.formSubmitObject.rat = this.formRat;
+
+            this.formSubmitObject.otherExpenseCheckbox = this.formOtherExpenseCheckbox;
             this.formSubmitObject.otherName = this.formOtherName;
             this.formSubmitObject.otherExpense = this.formOtherExpense;
 
-
-            this.formSubmitObject.iname = this.formName;
-            this.formSubmitObject.iDesignation = this.formCity;
-            this.formSubmitObject.iAddress = this.formName;
+            this.formSubmitObject.iname = this.iName;
+            this.formSubmitObject.iDesignation = this.iDesignation;
+            this.formSubmitObject.iAddress = this.iAddress;
 
             this.formSubmitObject.amountToPay = this.amountToPay;
 
-            axios.post('api/customer/create',{
-                body:this.formSubmitObject
-            })
-            .then(response =>{
+             
+            axios.post('api/customer/store',this.formSubmitObject)
+                .then(response => {
+                    console.log(response);
+                    this.$router.push({
+                        name:'confirmation',
+                        params:response
+                        });
+                    
+                }).catch(e=> {
 
-            })
-            .catch(e=>{
-
-            })
+                })
         },
     },
     created(){

@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\RModels\ate;
 use App\Models\Center;
- use Illuminate\Http\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+
+use Carbon\Carbon;
 
 class CustomerController extends Controller
 {
@@ -46,15 +50,19 @@ class CustomerController extends Controller
 
     {"body":{
         "name":"Lalthanpuia","mobileNumber":"8765","locality":"Electric",
-        "city":"Aizawl","district":"Aizawl","state":"Mizoram","free":"",
+        "city":"Aizawl","district":"Aizawl","state":"Mizoram","free":false,"freeReason":"df",
         "pcr":true,"truenat":true,"rat":true,"otherName":"OtherName","otherExpense":"77",
         "iname":"Lalthanpuia","iDesignation":"Aizawl","iAddress":"Lalthanpuia","amountToPay":377}}
     */
+/*
+    TODO::THINGS TO REMEMBER : THIS IS THE OLD ONE
+
+    
     public function store(Request $request)
     {
+       
 
-        $customer = new Customer();
-         
+        $customer = new Customer();  
         $customer->token= Str::random(8);
         
         if(Auth::user()){
@@ -65,7 +73,7 @@ class CustomerController extends Controller
         $customer->amount = $request['amountToPay'];
         $customer->name = $request['name'];
         $customer->locality = $request['locality'];
-        $customer->area = $request['city'];
+        $customer->city = $request['city'];
         $customer->district = $request['district'];
         $customer->state = $request['state'];
         $customer->mobile = $request['mobileNumber'];
@@ -99,8 +107,7 @@ class CustomerController extends Controller
         $customer->issuer_name = $request['iname'];
         $customer->issuer_designation = $request['iDesignation']; 
         $customer->issuer_office_address = $request['iAddress'];
-        //$customer->razorpay_payment_id = $request['razorpay_payment_id'];
-
+ 
         $customer->reason = $request['reason'];
 
         if($request['free']=="false")   
@@ -140,16 +147,77 @@ class CustomerController extends Controller
         }
         //26 => "merchant_param1=“.     ->department ID
         $merchant_data.='merchant_param1'.'='.$customer->id.'&';
-
         $encrypted_data = $this->encrypt($merchant_data,$working_key);
-        
-        // return Http::post('https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction', [
-        //     'encRequest' => $encrypted_data,
-        //     'access_code' => $access_code,
-        // ]);
-
         return view('payment.myCcavRequestHandler',compact('encrypted_data','access_code'));
-        //return redirect('/customer');
+     
+       
+       
+    }*/
+    public function store(Request $request)
+    {
+        error_log($request->name);
+        $validator = Validator::make($request->all(),[
+            'name'=>'required',
+            'mobileNumber'=>'required',
+            'locality'=>'required',
+            'city'=>'required',
+            'district'=>'required',
+            'state'=>'required',
+            'center'=>'required',
+        ]);
+
+        if($validator->fails()){
+            error_log("I Fail");
+
+        // return "FAIL";
+        }else{
+            error_log("I succeedd");
+        //    return "SUCCESS";
+        }
+        error_log($request['free']);
+
+        if($request->free){
+
+            $customer = new Customer();
+            $customer->token= Str::random(8);
+
+            $customer->amount = $request['amountToPay'];
+            $customer->name = $request['name'];
+            $customer->locality = $request['locality'];
+            $customer->city = $request['city'];
+            $customer->district = $request['district'];
+            $customer->state = $request['state'];
+            $customer->mobile = $request['mobileNumber'];
+            $customer->center = $request['center'];
+
+            $customer->pcr = $request['pcr'];
+            $customer->truenat = $request['truenat'];
+            $customer->rat = $request['rat'];
+
+            $customer->issuer_name = $request['iname'];
+            $customer->issuer_designation = $request['iDesignation']; 
+            $customer->issuer_office_address = $request['iAddress'];
+
+            //CCC STAYING TODO:
+
+            $current_timestamp = Carbon::now()->timestamp;
+            $random_number = Str::random(4);
+            $customer->token = $random_number."_".$current_timestamp;
+
+            $customer->free = $request['free'];
+            $customer->reason = $request['freeReason'];
+
+            if($request['otherExpenseCheckbox']){
+                $customer->other_expense = $request['otherExpense'];
+                $customer->other_name = $request['otherName'];
+            }
+            $customer->save();
+            return $customer;
+
+
+        }else{
+            return "PAYMENT NOT YET AVAILABLE";
+        }
     }
  
     public function show(Customer $customer)
@@ -175,7 +243,7 @@ class CustomerController extends Controller
         $customer->amount = $request['amount'];
         $customer->name = $request['name'];
         $customer->locality = $request['locality'];
-        $customer->area = $request['area'];
+        $customer->city = $request['city'];
         $customer->district = $request['district'];
         $customer->state = $request['state'];
         $customer->mobile = $request['mobile'];
@@ -212,7 +280,8 @@ class CustomerController extends Controller
 
         $customer->save();
 
-        return redirect("/customer/$customer->id")->withSuccess(trans('Update successfully'));
+        //return redirect("/customer/$customer->id")->withSuccess(trans('Update successfully'));
+        return true;
     }
 
    

@@ -21,7 +21,7 @@ class CreateCustomersTable extends Migration
             $table->string('amount',20)->nullable();
             $table->string('name',60)->nullable();
             $table->string('locality',60)->nullable();
-            $table->string('area',50)->nullable();
+            $table->string('city',50)->nullable();
             $table->string('district',50)->nullable();
             $table->string('state',50)->nullable();
             $table->string('mobile',20)->nullable();
@@ -33,7 +33,8 @@ class CreateCustomersTable extends Migration
             $table->boolean('pcr')->nullable();
             $table->boolean('truenat')->nullable();
             $table->boolean('rat')->nullable();
-            $table->text('other',600)->nullable();
+            $table->string('other_expense',50)->nullable();
+            $table->string('other_name')->nullable();
 
             $table->boolean('ccc')->nullable();
             $table->string('ccc_days',10)->nullable();

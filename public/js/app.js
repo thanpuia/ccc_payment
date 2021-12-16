@@ -5313,6 +5313,41 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/payment/Confirmation.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/payment/Confirmation.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {};
+  },
+  methods: {},
+  created: function created() {
+    console.log(this.$route.params);
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/payment/Create.vue?vue&type=script&lang=js&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/payment/Create.vue?vue&type=script&lang=js& ***!
@@ -5326,14 +5361,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5488,8 +5515,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       formDistrict: '',
       formState: '',
       formCenter: '',
-      formFree: false
-    }, _defineProperty(_ref, "formOtherExpense", ''), _defineProperty(_ref, "formOtherName", ''), _defineProperty(_ref, "formPcr", false), _defineProperty(_ref, "formTruenat", false), _defineProperty(_ref, "formRat", false), _defineProperty(_ref, "iName", ''), _defineProperty(_ref, "iDesignation", ''), _defineProperty(_ref, "iAddress", ''), _defineProperty(_ref, "formSubmitObject", {}), _ref;
+      formFree: false,
+      formFreeReason: ''
+    }, _defineProperty(_ref, "formOtherExpense", ''), _defineProperty(_ref, "formOtherName", ''), _defineProperty(_ref, "formPcr", false), _defineProperty(_ref, "formTruenat", false), _defineProperty(_ref, "formRat", false), _defineProperty(_ref, "iName", ''), _defineProperty(_ref, "iDesignation", ''), _defineProperty(_ref, "iAddress", ''), _defineProperty(_ref, "formOtherExpenseCheckbox", false), _defineProperty(_ref, "formSubmitObject", {}), _defineProperty(_ref, "showSuccessBookingModal", true), _ref;
   },
   methods: {
     freeClick: function freeClick() {
@@ -5523,7 +5551,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(_this.rate);
         /*
         NOTE:-
-        0.PCT | 1. Truenat | 2. RAT | 3.Food | 4. Accomodation
+        0.PCR | 1. Truenat | 2. RAT | 3.Food | 4. Accomodation
         This is how it is ordered in the database, its easier
         */
 
@@ -5542,25 +5570,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.tempAmount = parseInt(this.formOtherExpense);
     },
     submitForm: function submitForm() {
+      var _this2 = this;
+
       this.formSubmitObject.name = this.formName;
       this.formSubmitObject.mobileNumber = this.formMobileNumber;
       this.formSubmitObject.locality = this.formLocality;
       this.formSubmitObject.city = this.formCity;
       this.formSubmitObject.district = this.formDistrict;
       this.formSubmitObject.state = this.formState;
+      this.formSubmitObject.center = this.formCenter;
       this.formSubmitObject.free = this.formFree;
+      this.formSubmitObject.freeReason = this.formFreeReason;
       this.formSubmitObject.pcr = this.formPcr;
       this.formSubmitObject.truenat = this.formTruenat;
       this.formSubmitObject.rat = this.formRat;
+      this.formSubmitObject.otherExpenseCheckbox = this.formOtherExpenseCheckbox;
       this.formSubmitObject.otherName = this.formOtherName;
       this.formSubmitObject.otherExpense = this.formOtherExpense;
-      this.formSubmitObject.iname = this.formName;
-      this.formSubmitObject.iDesignation = this.formCity;
-      this.formSubmitObject.iAddress = this.formName;
+      this.formSubmitObject.iname = this.iName;
+      this.formSubmitObject.iDesignation = this.iDesignation;
+      this.formSubmitObject.iAddress = this.iAddress;
       this.formSubmitObject.amountToPay = this.amountToPay;
-      axios.post('api/customer/create', {
-        body: this.formSubmitObject
-      }).then(function (response) {})["catch"](function (e) {});
+      axios.post('api/customer/store', this.formSubmitObject).then(function (response) {
+        console.log(response);
+
+        _this2.$router.push({
+          name: 'confirmation',
+          params: response
+        });
+      })["catch"](function (e) {});
     }
   },
   created: function created() {
@@ -5669,6 +5707,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue");
 /* harmony import */ var _components_payment_Create_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/payment/Create.vue */ "./resources/js/components/payment/Create.vue");
+/* harmony import */ var _components_payment_Confirmation_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/payment/Confirmation.vue */ "./resources/js/components/payment/Confirmation.vue");
+
 
 
 var routes = [{
@@ -5679,6 +5719,10 @@ var routes = [{
   name: 'create',
   path: '/create',
   component: _components_payment_Create_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+}, {
+  name: 'confirmation',
+  path: '/confirmation',
+  component: _components_payment_Confirmation_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
 }];
 
 /***/ }),
@@ -28699,6 +28743,45 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/payment/Confirmation.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/payment/Confirmation.vue ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Confirmation_vue_vue_type_template_id_2fd51789___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Confirmation.vue?vue&type=template&id=2fd51789& */ "./resources/js/components/payment/Confirmation.vue?vue&type=template&id=2fd51789&");
+/* harmony import */ var _Confirmation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Confirmation.vue?vue&type=script&lang=js& */ "./resources/js/components/payment/Confirmation.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Confirmation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Confirmation_vue_vue_type_template_id_2fd51789___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Confirmation_vue_vue_type_template_id_2fd51789___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/payment/Confirmation.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/payment/Create.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/payment/Create.vue ***!
@@ -28769,6 +28852,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./ExampleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
  /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/payment/Confirmation.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/payment/Confirmation.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Confirmation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Confirmation.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/payment/Confirmation.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Confirmation_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -28848,6 +28947,23 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/payment/Confirmation.vue?vue&type=template&id=2fd51789&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/payment/Confirmation.vue?vue&type=template&id=2fd51789& ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Confirmation_vue_vue_type_template_id_2fd51789___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Confirmation_vue_vue_type_template_id_2fd51789___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Confirmation_vue_vue_type_template_id_2fd51789___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Confirmation.vue?vue&type=template&id=2fd51789& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/payment/Confirmation.vue?vue&type=template&id=2fd51789&");
+
+
+/***/ }),
+
 /***/ "./resources/js/components/payment/Create.vue?vue&type=template&id=5d228dd0&":
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/payment/Create.vue?vue&type=template&id=5d228dd0& ***!
@@ -28911,8 +29027,8 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("li", { staticClass: "nav-item" }, [
-          _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-            _vm._v("New Receipt"),
+          _c("a", { staticClass: "nav-link", attrs: { href: "/create" } }, [
+            _vm._v("Create"),
           ]),
         ]),
         _vm._v(" "),
@@ -28987,6 +29103,55 @@ var staticRenderFns = [
     ])
   },
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/payment/Confirmation.vue?vue&type=template&id=2fd51789&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/payment/Confirmation.vue?vue&type=template&id=2fd51789& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container mt-5", attrs: { align: "center" } },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "p-4 shadow-sm",
+          staticStyle: { "background-color": "#fcfcfc" },
+        },
+        [
+          _c("img", {
+            staticStyle: { width: "520px" },
+            attrs: {
+              src: "https://i.imgur.com/LaHmYc2.jpeg",
+              alt: "sad animal",
+            },
+          }),
+          _vm._v(" "),
+          _c("b-table"),
+        ],
+        1
+      ),
+    ]
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -29201,19 +29366,19 @@ var render = function () {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.center,
-                    expression: "center",
+                    value: _vm.formCenter,
+                    expression: "formCenter",
                   },
                 ],
                 staticClass: "form-control mb-3",
                 attrs: { type: "text", id: "center" },
-                domProps: { value: _vm.center },
+                domProps: { value: _vm.formCenter },
                 on: {
                   input: function ($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.center = $event.target.value
+                    _vm.formCenter = $event.target.value
                   },
                 },
               }),
@@ -29287,11 +29452,28 @@ var render = function () {
                     _vm._v(" "),
                     _vm.freeModel
                       ? _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formFreeReason,
+                              expression: "formFreeReason",
+                            },
+                          ],
                           attrs: {
                             type: "text",
                             name: "free-reason",
                             id: "free-reason",
                             placeholder: "Reasons",
+                          },
+                          domProps: { value: _vm.formFreeReason },
+                          on: {
+                            input: function ($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.formFreeReason = $event.target.value
+                            },
                           },
                         })
                       : _vm._e(),
@@ -29445,13 +29627,50 @@ var render = function () {
                     _c("br"),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.formOtherExpenseCheckbox,
+                          expression: "formOtherExpenseCheckbox",
+                        },
+                      ],
                       attrs: {
                         type: "checkbox",
                         id: "other",
                         name: "other",
                         value: "other",
                       },
-                      on: { click: _vm.otherFieldClick },
+                      domProps: {
+                        checked: Array.isArray(_vm.formOtherExpenseCheckbox)
+                          ? _vm._i(_vm.formOtherExpenseCheckbox, "other") > -1
+                          : _vm.formOtherExpenseCheckbox,
+                      },
+                      on: {
+                        click: _vm.otherFieldClick,
+                        change: function ($event) {
+                          var $$a = _vm.formOtherExpenseCheckbox,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = "other",
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                (_vm.formOtherExpenseCheckbox = $$a.concat([
+                                  $$v,
+                                ]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.formOtherExpenseCheckbox = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.formOtherExpenseCheckbox = $$c
+                          }
+                        },
+                      },
                     }),
                     _vm._v(" "),
                     _c("label", { attrs: { for: "other" } }, [
@@ -29558,11 +29777,7 @@ var render = function () {
                         staticClass: "form-label",
                         attrs: { for: "stayingAtCCC" },
                       },
-                      [
-                        _vm._v(
-                          "Staying at Covid Care Center (CCC)\n                                \n                            "
-                        ),
-                      ]
+                      [_vm._v("Staying at Covid Care Center (CCC) ")]
                     ),
                     _vm._v(" "),
                     _c("p", { staticStyle: { "background-color": "red" } }, [
@@ -29620,7 +29835,7 @@ var render = function () {
                 { staticClass: "mt-2", staticStyle: { "font-size": "22px" } },
                 [
                   _vm._v(
-                    "\n                        Total Amount To Pay: ₹" +
+                    " Total Amount To Pay: ₹" +
                       _vm._s(_vm.amountToPay) +
                       "\n                        "
                   ),
@@ -29744,10 +29959,92 @@ var render = function () {
           [_vm._v("Submit")]
         ),
       ]),
+      _vm._v(" "),
+      _vm.showSuccessBookingModal ? _c("div", [_vm._m(0)]) : _vm._e(),
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModalCenter",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true",
+        },
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" },
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "exampleModalLongTitle" },
+                  },
+                  [_vm._v("Modal title")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close",
+                    },
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×"),
+                    ]),
+                  ]
+                ),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _vm._v("\n                    ...\n                "),
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                  },
+                  [_vm._v("Close")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "btn btn-primary", attrs: { type: "button" } },
+                  [_vm._v("Save changes")]
+                ),
+              ]),
+            ]),
+          ]
+        ),
+      ]
+    )
+  },
+]
 render._withStripped = true
 
 
