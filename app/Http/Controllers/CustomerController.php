@@ -216,11 +216,18 @@ class CustomerController extends Controller
                 $customer->other_name = $request['otherName'];
             }
             $customer->save();
-            return $customer;
-
+            //return $customer;
+            return response()->json([
+                'success' => true,
+                'body' => $customer
+            ]);
 
         }else{
-            return "PAYMENT NOT YET AVAILABLE";
+            return response()->json([
+                'success' => false,
+                'body' => "PAYMENT NOT YET AVAILABLE",
+            ]);
+
         }
     }
  

@@ -3,7 +3,7 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-6">
-                    <div style="background-color:#fcfcfc" class="p-4 shadow-sm">
+                    <div style="background-color:#fcfcfc" class="p-5 shadow-sm">
                         <h3>New Customer</h3>
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control mb-3" id="name" v-model="formName">
