@@ -2,6 +2,7 @@ import Example from './components/ExampleComponent.vue';
 import Create from './components/payment/Create.vue';
 import Confirmation from './components/payment/Confirmation.vue';
 import PaymentList from './components/payment/PaymentList.vue';
+import Login from './components/Auth/Login.vue';
 
 export const routes = [
     {
@@ -23,5 +24,10 @@ export const routes = [
         name:'payment_list',
         path: '/payment-list',
         component: PaymentList
+    },
+    {
+        name:'login',
+        path: '/loginp',
+        component: Login
     },
 ];

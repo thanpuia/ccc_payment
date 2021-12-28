@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Hash;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -34,6 +37,12 @@ class DatabaseSeeder extends Seeder
         DB::table('rates')->insert([
             'name' => 'Accomodation',
             'rate' => '50',
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'Nokia',
+            'email' => 'admin@mail.com',
+            'password' => Hash::make('password')
         ]);
 
     }
